@@ -1,7 +1,9 @@
-import {Switch, Route} from 'react-router-dom'
+import {Switch, Route, Redirect} from 'react-router-dom'
 
+import AuthenticatedRoute from './components/AuthenticatedRoute'
 import Home from './components/Home'
 import Login from './components/Login'
+import NotFound from './components/NotFound'
 
 import './App.css'
 
@@ -9,7 +11,9 @@ import './App.css'
 const App = () => (
   <Switch>
     <Route exact path="/login" component={Login} />
-    <Route exact path="/" component={Home} />
+    <AuthenticatedRoute exact path="/" component={Home} />
+    <Route exact path="/not-found" component={NotFound} />
+    <Redirect to="/not-found" />
   </Switch>
 )
 

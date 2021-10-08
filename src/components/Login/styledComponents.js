@@ -79,9 +79,17 @@ export const FormSubmitButton = styled.button`
   color: #ffffff;
   font-weight: bold;
   margin-top: 10px;
+  cursor: pointer;
   @media screen and (min-width: 768px) {
     font-size: 18px;
     padding: 5px;
     height: 40px;
   }
+`
+
+export const ErrorTextPara = styled.p`
+  margin: 10px 0px 3px 10px;
+  color: #ff0000;
+  font-size: 14px;
+  font-family: 'Roboto';
 `

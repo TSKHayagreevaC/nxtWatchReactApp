@@ -1,24 +1,13 @@
+import {Component} from 'react'
+
 import {RiCloseFill} from 'react-icons/ri'
-import {AiFillHome} from 'react-icons/ai'
-import {HiFire} from 'react-icons/hi'
-import {SiYoutubegaming} from 'react-icons/si'
-import {BiListPlus} from 'react-icons/bi'
 
 import Header from '../Header'
+import SidebarSection from '../SidebarContainer'
 
 import {
   HomeContainer,
   HomeBarsContainer,
-  SidebarContainer,
-  SidebarTopContainer,
-  SidebarTopContainerList,
-  SidebarTopContainerListItem,
-  SidebarTopContainerListItemText,
-  SidebarBottomContainer,
-  SidebarBottomHeading,
-  SidebarBottomIconsContainer,
-  SidebarBottomIconImage,
-  SidebarBottomContainerText,
   MainContainer,
   BannerContainer,
   BannerContentContainer,
@@ -28,76 +17,65 @@ import {
   BannerButton,
 } from './styledComponents'
 
-const Home = () => (
-  <HomeContainer>
-    <Header />
-    <HomeBarsContainer>
-      <SidebarContainer>
-        <SidebarTopContainer>
-          <SidebarTopContainerList>
-            <SidebarTopContainerListItem>
-              <AiFillHome size="22" color="#424242" />
-              <SidebarTopContainerListItemText>
-                Home
-              </SidebarTopContainerListItemText>
-            </SidebarTopContainerListItem>
-            <SidebarTopContainerListItem>
-              <HiFire size="22" color="#424242" />
-              <SidebarTopContainerListItemText>
-                Trending
-              </SidebarTopContainerListItemText>
-            </SidebarTopContainerListItem>
-            <SidebarTopContainerListItem>
-              <SiYoutubegaming size="22" color="#424242" />
-              <SidebarTopContainerListItemText>
-                Gaming
-              </SidebarTopContainerListItemText>
-            </SidebarTopContainerListItem>
-            <SidebarTopContainerListItem>
-              <BiListPlus size="22" color="#424242" />
-              <SidebarTopContainerListItemText>
-                Save videos
-              </SidebarTopContainerListItemText>
-            </SidebarTopContainerListItem>
-          </SidebarTopContainerList>
-        </SidebarTopContainer>
-        <SidebarBottomContainer>
-          <SidebarBottomHeading>CONTACT US</SidebarBottomHeading>
-          <SidebarBottomIconsContainer>
-            <SidebarBottomIconImage
-              src="https://assets.ccbp.in/frontend/react-js/nxt-watch-facebook-logo-img.png"
-              alt="facebook logo"
-            />
-            <SidebarBottomIconImage
-              src="https://assets.ccbp.in/frontend/react-js/nxt-watch-twitter-logo-img.png"
-              alt="twitter logo"
-            />
-            <SidebarBottomIconImage
-              src="https://assets.ccbp.in/frontend/react-js/nxt-watch-linked-in-logo-img.png"
-              alt="linked in logo"
-            />
-          </SidebarBottomIconsContainer>
-          <SidebarBottomContainerText>
-            Enjoy! Now to see your channels and recommendations!
-          </SidebarBottomContainerText>
-        </SidebarBottomContainer>
-      </SidebarContainer>
+class Home extends Component {
+  state = {
+    isBannerActive: true,
+    searchInput: '',
+  }
+
+  componentDidMount() {
+    this.getVideosData()
+  }
+
+  getVideosData = async () => {
+    const {searchInput} = this.state
+    const videosListUrl = `https://apis.ccbp.in/videos/all?search=${searchInput}`
+    const response = await fetch(videosListUrl)
+    console.log(response)
+  }
+
+  hideBanner = () => {
+    this.setState({
+      isBannerActive: false,
+    })
+  }
+
+  renderBannerContainer = () => (
+    <BannerContainer>
+      <BannerContentContainer>
+        <BannerImage src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png" />
+        <BannerHeading>
+          Buy Nxt Watch Premium prepaid plans with UPI
+        </BannerHeading>
+        <BannerButton>GET IT NOW</BannerButton>
+      </BannerContentContainer>
+      <BannerCloseButton type="button" onClick={this.hideBanner}>
+        <RiCloseFill size="22" />
+      </BannerCloseButton>
+    </BannerContainer>
+  )
+
+  renderVideosListContainer = () => {
+    const {isBannerActive} = this.state
+    return (
       <MainContainer>
-        <BannerContainer>
-          <BannerContentContainer>
-            <BannerImage src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png" />
-            <BannerHeading>
-              Buy Nxt Watch Premium prepaid plans with UPI
-            </BannerHeading>
-            <BannerButton>GET IT NOW</BannerButton>
-          </BannerContentContainer>
-          <BannerCloseButton>
-            <RiCloseFill size="22" />
-          </BannerCloseButton>
-        </BannerContainer>
+        {isBannerActive ? this.renderBannerContainer() : null}
+        videos list
       </MainContainer>
-    </HomeBarsContainer>
-  </HomeContainer>
-)
+    )
+  }
+
+  render() {
+    return (
+      <HomeContainer>
+        <Header />
+        <HomeBarsContainer>
+          <SidebarSection />
+          {this.renderVideosListContainer()}
+        </HomeBarsContainer>
+      </HomeContainer>
+    )
+  }
+}
 
 export default Home
