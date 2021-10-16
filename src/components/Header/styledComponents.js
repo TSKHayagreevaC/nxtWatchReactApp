@@ -7,7 +7,7 @@ export const HeaderContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: #ffffff;
+  background-color: ${props => props.backgroundColor};
   padding: 0px 20px 0px 20px;
   @media screen and (min-width: 768px) {
     padding: 0px 40px 0px 40px;
@@ -88,12 +88,72 @@ export const HeaderLogoutButton = styled.button`
   @media screen and (min-width: 768px) {
     display: block;
     background-color: transparent;
-    border: 2px solid #3b82f6;
+    border: 2px solid #909090;
     border-radius: 4px;
-    color: #3b82f6;
+    color: #909090;
     font-weight: bold;
     font-size: 16px;
     padding: 10px;
     cursor: pointer;
   }
+`
+
+export const LogoutModalContainer = styled.div`
+  width: 80%;
+  background-color: ${props => props.backgroundColor};
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  @media screen and (min-width: 768px) {
+    width: 50%;
+  }
+`
+
+export const LogoutModalText = styled.p`
+  margin: 5px 0px 5px 0px;
+  font-size: 18px;
+  color: ${props => props.color};
+  font-family: 'Roboto';
+  text-align: center;
+  font-weight: bold;
+`
+
+export const LogoutButtonsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: transparent;
+`
+
+export const LogoutModalCancelButton = styled.button`
+  border: 2px solid #606060;
+  color: #606060;
+  background-color: transparent;
+  border-radius: 4px;
+  padding: 4px;
+  font-weight: bold;
+  font-size: 18px;
+  height: 40px;
+  width: 100px;
+  margin: 10px;
+  cursor: pointer;
+`
+
+export const LogoutModalLogoutButton = styled.button`
+  border: none;
+  outline: none;
+  background: #3b82f6;
+  border-radius: 4px;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 18px;
+  height: 40px;
+  width: 100px;
+  margin: 10px;
+  cursor: pointer;
 `

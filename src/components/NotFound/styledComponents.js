@@ -16,15 +16,16 @@ export const NotFoundContentContainer = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  background-color: ${props => props.backgroundColor};
 `
 
 export const NotFoundMainContainer = styled.div`
   min-height: 100vh;
   width: 100%;
-  background-color: #f1f5f9;
+  background-color: ${props => props.backgroundColor};
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   @media screen and (min-width: 768px) {
     width: 70%;
@@ -32,16 +33,20 @@ export const NotFoundMainContainer = styled.div`
 `
 
 export const NotFoundImage = styled.img`
-  width: 60%;
-  margin: 20px;
+  width: 50%;
+  margin: 50px 10px 10px 10px;
 `
 
 export const NotFoundHeading = styled.h1`
   margin: 10px 0px 10px 0px;
   text-align: center;
+  color: ${props => props.color};
 `
 
 export const NotFoundPara = styled.p`
   margin: 5px 0px 5px 0px;
   text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+  color: ${props => props.color};
 `

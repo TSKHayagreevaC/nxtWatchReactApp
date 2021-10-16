@@ -6,16 +6,18 @@ export const LoginContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: ${props => props.backgroundColor};
 `
 
 export const LoginForm = styled.form`
+  background-color: ${props => props.backgroundColor};
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: flex-start;
   width: 80%;
   border-radius: 8px;
-  box-shadow: 5px 5px 5px 5px #cccccc;
+  box-shadow: 1px 1px 1px 1px #cccccc;
   padding: 20px;
   @media screen and (min-width: 768px) {
     width: 40%;
@@ -33,7 +35,7 @@ export const LoginFormLogo = styled.img`
 export const LoginFormLabel = styled.label`
   font-size: 12px;
   font-weight: bold;
-  color: #475569;
+  color: ${props => props.color};
   margin: 12px 0px 3px 0px;
   @media screen and (min-width: 768px) {
     font-size: 16px;
@@ -44,7 +46,7 @@ export const LoginFormLabel = styled.label`
 export const CheckboxLabel = styled.label`
   font-size: 12px;
   font-weight: bold;
-  color: #475569;
+  color: ${props => props.color};
   margin: 3px 0px 3px 0px;
 `
 

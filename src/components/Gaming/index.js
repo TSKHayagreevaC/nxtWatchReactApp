@@ -2,34 +2,28 @@ import {Component} from 'react'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
 
-import {RiCloseFill} from 'react-icons/ri'
-import {BsSearch} from 'react-icons/bs'
+import {SiYoutubegaming} from 'react-icons/si'
 
 import Header from '../Header'
 import SidebarSection from '../SidebarContainer'
-import VideoItemCard from '../VideoListItem'
+import VideoItemCardGaming from '../VideoListItemGaming'
 import Context from '../../context/Context'
 
 import './index.css'
+
 import {
   HomeContainer,
   HomeBarsContainer,
   MainContainer,
   BannerContainer,
-  BannerContentContainer,
-  BannerCloseButton,
+  BannerIconHeadingContainer,
   BannerHeading,
-  BannerImage,
-  BannerButton,
-  VideosListHome,
+  VideosList,
   FailureViewContainer,
   FailureViewImage,
   FailureHeading,
   FailureText,
   FailureRetryButton,
-  SearchForm,
-  SearchInput,
-  SearchButton,
   NoVideosViewContainer,
   NoVideosViewImage,
   NoVideosHeading,
@@ -44,45 +38,22 @@ const apiConstants = {
   inProgress: 'IN_PROGRESS',
 }
 
-class Home extends Component {
+class Gaming extends Component {
   state = {
-    isBannerActive: true,
     apiStatus: apiConstants.initial,
     videosList: [],
-    searchInput: '',
-    searchParameter: '',
   }
 
   componentDidMount() {
     this.getVideosData()
   }
 
-  updateSearchValue = event => {
-    this.setState({searchInput: event.target.value})
-  }
-
-  onSubmitSearchForm = () => {
-    const {searchInput} = this.state
-    this.setState({searchParameter: searchInput}, this.getVideosData)
-  }
-
-  changeActiveRoute = () => (
-    <Context.Consumer>
-      {value => {
-        const {alterActiveRoute, activeRoute} = value
-        alterActiveRoute('home')
-        console.log(activeRoute)
-      }}
-    </Context.Consumer>
-  )
-
   getVideosData = async () => {
     this.setState({
       apiStatus: apiConstants.inProgress,
     })
-    const {searchParameter} = this.state
     const JwtToken = Cookies.get('jwt_token')
-    const videosListUrl = `https://apis.ccbp.in/videos/all?search=${searchParameter}`
+    const videosListUrl = `https://apis.ccbp.in/videos/gaming`
     const options = {
       headers: {
         Authorization: `Bearer ${JwtToken}`,
@@ -93,12 +64,7 @@ class Home extends Component {
     if (response.ok) {
       const responseData = await response.json()
       const formattedData = responseData.videos.map(eachItem => ({
-        channel: {
-          name: eachItem.channel.name,
-          profileImageUrl: eachItem.channel.profile_image_url,
-        },
         id: eachItem.id,
-        publishedAt: eachItem.published_at,
         thumbnailUrl: eachItem.thumbnail_url,
         title: eachItem.title,
         viewCount: eachItem.view_count,
@@ -112,12 +78,6 @@ class Home extends Component {
         apiStatus: apiConstants.failure,
       })
     }
-  }
-
-  hideBanner = () => {
-    this.setState({
-      isBannerActive: false,
-    })
   }
 
   onClickFailureRetry = () => {
@@ -191,12 +151,38 @@ class Home extends Component {
               No Search results found
             </NoVideosHeading>
             <NoVideosText color={textColor}>
-              Try different key words or remove search filter
+              Try different key words or remove filter
             </NoVideosText>
             <NoVideosViewRetryButton type="button" onClick={this.getVideosData}>
               Retry
             </NoVideosViewRetryButton>
           </NoVideosViewContainer>
+        )
+      }}
+    </Context.Consumer>
+  )
+
+  renderGamingBannerContainer = () => (
+    <Context.Consumer>
+      {value => {
+        const {isLightThemeActive} = value
+        const bannerBackgroundColor = isLightThemeActive ? '#e2e8f0' : '#313131'
+        const bannerIconBackgroundColor = isLightThemeActive
+          ? '#f1f5f9'
+          : '#231f20'
+        const bannerHeadingColor = isLightThemeActive ? '#181818' : '#f9f9f9'
+        return (
+          <BannerContainer
+            backgroundColor={bannerBackgroundColor}
+            data-testid="banner"
+          >
+            <BannerIconHeadingContainer
+              backgroundColor={bannerIconBackgroundColor}
+            >
+              <SiYoutubegaming color="#ff0000" size="90%" />
+            </BannerIconHeadingContainer>
+            <BannerHeading color={bannerHeadingColor}>Gaming</BannerHeading>
+          </BannerContainer>
         )
       }}
     </Context.Consumer>
@@ -208,33 +194,16 @@ class Home extends Component {
       return this.noVideosView()
     }
     return (
-      <VideosListHome>
-        {videosList.map(eachItem => (
-          <VideoItemCard key={eachItem.id} videoItem={eachItem} />
-        ))}
-      </VideosListHome>
+      <>
+        {this.renderGamingBannerContainer()}
+        <VideosList>
+          {videosList.map(eachItem => (
+            <VideoItemCardGaming key={eachItem.id} videoItem={eachItem} />
+          ))}
+        </VideosList>
+      </>
     )
   }
-
-  renderBannerContainer = () => (
-    <BannerContainer data-testid="banner">
-      <BannerContentContainer>
-        <BannerImage
-          src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
-          alt="nxt watch logo"
-        />
-        <BannerHeading>Buy Nxt Watch Premium</BannerHeading>
-        <BannerButton type="button">GET IT NOW</BannerButton>
-      </BannerContentContainer>
-      <BannerCloseButton
-        type="button"
-        onClick={this.hideBanner}
-        data-testid="close"
-      >
-        <RiCloseFill size="22" />
-      </BannerCloseButton>
-    </BannerContainer>
-  )
 
   renderAllVideosList = () => {
     const {apiStatus} = this.state
@@ -251,45 +220,14 @@ class Home extends Component {
     }
   }
 
-  renderSearchContainer = () => (
-    <Context.Consumer>
-      {value => {
-        const {isLightThemeActive} = value
-        const inputTextColor = isLightThemeActive ? '#181818' : '#f9f9f9'
-        const buttonBackgroundColor = isLightThemeActive ? '#f9f9f9' : '#181818'
-        return (
-          <SearchForm>
-            <SearchInput
-              placeholder="Search"
-              type="search"
-              color={inputTextColor}
-              onChange={this.updateSearchValue}
-            />
-            <SearchButton
-              type="button"
-              backgroundColor={buttonBackgroundColor}
-              data-testid="searchButton"
-              onClick={this.onSubmitSearchForm}
-            >
-              <BsSearch size="22" color={inputTextColor} />
-            </SearchButton>
-          </SearchForm>
-        )
-      }}
-    </Context.Consumer>
-  )
-
   renderMainContainer = () => (
     <Context.Consumer>
       {value => {
-        const {isBannerActive} = this.state
         const {isLightThemeActive} = value
         const mainContainerBgColor = isLightThemeActive ? '#f1f5f9' : '#0f0f0f'
 
         return (
           <MainContainer backgroundColor={mainContainerBgColor}>
-            {isBannerActive ? this.renderBannerContainer() : null}
-            {this.renderSearchContainer()}
             {this.renderAllVideosList()}
           </MainContainer>
         )
@@ -302,11 +240,11 @@ class Home extends Component {
       <Context.Consumer>
         {value => {
           const {isLightThemeActive} = value
-          const homeBgColor = isLightThemeActive ? '#f9f9f9' : '#181818'
+          const gamingBgColor = isLightThemeActive ? '#f9f9f9' : '#0f0f0f'
           return (
-            <HomeContainer backgroundColor={homeBgColor} data-testid="home">
+            <HomeContainer backgroundColor={gamingBgColor} data-testid="gaming">
               <Header />
-              <HomeBarsContainer backgroundColor={homeBgColor}>
+              <HomeBarsContainer backgroundColor={gamingBgColor}>
                 <SidebarSection />
                 {this.renderMainContainer()}
               </HomeBarsContainer>
@@ -318,4 +256,4 @@ class Home extends Component {
   }
 }
 
-export default Home
+export default Gaming

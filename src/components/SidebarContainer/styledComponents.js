@@ -9,6 +9,7 @@ export const SidebarContainer = styled.div`
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    background-color: ${props => props.backgroundColor};
   }
 `
 
@@ -35,14 +36,15 @@ export const SidebarTopContainerListItem = styled.li`
   justify-content: flex-start;
   align-items: center;
   padding: 5px 5px 5px 15px;
+  color: ${props => props.color};
+  background-color: ${props => props.backgroundColor};
 `
 export const SidebarTopContainerListItemText = styled.p`
   font-size: 20px;
   font-family: 'Roboto';
   margin: 5px 0px 5px 15px;
-  color: #424242;
   font-weight: 600;
-  color: #424242;
+  color: ${props => props.color};
 `
 
 export const SidebarBottomContainer = styled.div`
@@ -54,11 +56,12 @@ export const SidebarBottomContainer = styled.div`
   padding: 5px 5px 5px 15px;
 `
 
-export const SidebarBottomHeading = styled.h1`
+export const SidebarBottomHeading = styled.p`
   margin: 5px 0px 5px 0px;
   font-family: 'Roboto';
-  font-size: 24px;
-  color: #424242;
+  font-size: 20px;
+  font-weight: bold;
+  color: ${props => props.color};
 `
 
 export const SidebarBottomIconsContainer = styled.div`
@@ -79,7 +82,7 @@ export const SidebarBottomIconImage = styled.img`
 export const SidebarBottomContainerText = styled.p`
   margin: 3px 0px 3px 0px;
   font-family: 'Roboto';
-  font-size: 18px;
-  color: #424242;
+  font-size: 16px;
+  color: ${props => props.color};
   font-weight: 500;
 `

@@ -2,6 +2,7 @@ import {Component} from 'react'
 import {Redirect} from 'react-router-dom'
 import Cookies from 'js-cookie'
 
+import Context from '../../context/Context'
 import {
   LoginContainer,
   LoginForm,
@@ -72,41 +73,68 @@ class Login extends Component {
   }
 
   render() {
-    const {errorMessage, displayErrorMsg, displayPassword} = this.state
-    const token = Cookies.get('jwt_token')
-    if (token !== undefined) {
-      return <Redirect to="/" />
-    }
     return (
-      <LoginContainer>
-        <LoginForm onSubmit={this.attemptLogin}>
-          <LoginFormLogo src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png" />
-          <LoginFormLabel htmlFor="username">USERNAME</LoginFormLabel>
-          <LoginFormInput
-            id="username"
-            placeholder="Username"
-            type="text"
-            onChange={this.getUsername}
-          />
-          <LoginFormLabel htmlFor="password">PASSWORD</LoginFormLabel>
-          <LoginFormInput
-            id="password"
-            placeholder="Password"
-            type={displayPassword ? 'text' : 'password'}
-            onChange={this.getPassword}
-          />
-          <CheckboxContainer>
-            <LoginFormCheckboxInput
-              id="showPassword"
-              type="checkbox"
-              onChange={this.showPassword}
-            />
-            <CheckboxLabel htmlFor="showPassword">Show Password</CheckboxLabel>
-          </CheckboxContainer>
-          <FormSubmitButton>Login</FormSubmitButton>
-          {displayErrorMsg && <ErrorTextPara>*{errorMessage}</ErrorTextPara>}
-        </LoginForm>
-      </LoginContainer>
+      <Context.Consumer>
+        {value => {
+          const {isLightThemeActive} = value
+          const loginFormLogo = isLightThemeActive
+            ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png'
+            : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-dark-theme-img.png'
+          const loginBgColor = isLightThemeActive ? '#f9f9f9' : '#181818'
+          const loginFormBgColor = isLightThemeActive ? '#f9f9f9' : '#0f0f0f'
+          const loginFormLabelColor = isLightThemeActive ? '#181818' : '#f9f9f9'
+          const {errorMessage, displayErrorMsg, displayPassword} = this.state
+          const token = Cookies.get('jwt_token')
+          if (token !== undefined) {
+            return <Redirect to="/" />
+          }
+          return (
+            <LoginContainer backgroundColor={loginBgColor}>
+              <LoginForm
+                backgroundColor={loginFormBgColor}
+                onSubmit={this.attemptLogin}
+              >
+                <LoginFormLogo src={loginFormLogo} alt="website logo" />
+                <LoginFormLabel color={loginFormLabelColor} htmlFor="username">
+                  USERNAME
+                </LoginFormLabel>
+                <LoginFormInput
+                  id="username"
+                  placeholder="Username"
+                  type="text"
+                  onChange={this.getUsername}
+                />
+                <LoginFormLabel color={loginFormLabelColor} htmlFor="password">
+                  PASSWORD
+                </LoginFormLabel>
+                <LoginFormInput
+                  id="password"
+                  placeholder="Password"
+                  type={displayPassword ? 'text' : 'password'}
+                  onChange={this.getPassword}
+                />
+                <CheckboxContainer>
+                  <LoginFormCheckboxInput
+                    id="showPassword"
+                    type="checkbox"
+                    onChange={this.showPassword}
+                  />
+                  <CheckboxLabel
+                    color={loginFormLabelColor}
+                    htmlFor="showPassword"
+                  >
+                    Show Password
+                  </CheckboxLabel>
+                </CheckboxContainer>
+                <FormSubmitButton>Login</FormSubmitButton>
+                {displayErrorMsg && (
+                  <ErrorTextPara>*{errorMessage}</ErrorTextPara>
+                )}
+              </LoginForm>
+            </LoginContainer>
+          )
+        }}
+      </Context.Consumer>
     )
   }
 }
