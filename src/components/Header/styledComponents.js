@@ -1,5 +1,13 @@
 import styled from 'styled-components'
 
+export const HeaderBgContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+
 export const HeaderContainer = styled.div`
   height: 10vh;
   width: 100%;
@@ -39,6 +47,16 @@ export const HeaderThemeButton = styled.button`
   outline: none;
   background-color: transparent;
   cursor: pointer;
+`
+
+export const HeaderHamburgerButton = styled.button`
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
 `
 
 export const HeaderUserImageContainer = styled.div`
@@ -96,6 +114,51 @@ export const HeaderLogoutButton = styled.button`
     padding: 10px;
     cursor: pointer;
   }
+`
+
+export const HamburgerDisplayContainer = styled.div`
+  display: ${props => props.display};
+  align-self: flex-end;
+`
+
+export const HamburgerMenuContainer = styled.div`
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  align-self: flex-end;
+  background-color: ${props => props.backgroundColor};
+  margin: 0px 10px 10px 10px;
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
+`
+
+export const SidebarTopContainerList = styled.ul`
+  width: 100%;
+  list-style: none;
+  padding: 5px;
+  margin: 5px 0px 5px 0px;
+`
+
+export const SidebarTopContainerListItem = styled.li`
+  list-style-type: none;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 5px 5px 5px 15px;
+  color: ${props => props.color};
+  background-color: ${props => props.backgroundColor};
+`
+export const SidebarTopContainerListItemText = styled.p`
+  font-size: 20px;
+  font-family: 'Roboto';
+  margin: 5px 0px 5px 15px;
+  font-weight: 600;
+  color: ${props => props.color};
 `
 
 export const LogoutModalContainer = styled.div`

@@ -8,6 +8,7 @@ export const VideoListItem = styled.li`
   @media screen and (min-width: 768px) {
     width: 220px;
     height: 220px;
+    margin: 20px 20px 40px 20px;
   }
 `
 
@@ -16,7 +17,12 @@ export const VideoListItemContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
 `
 
 export const VideoListItemThumbnailContainer = styled.div`

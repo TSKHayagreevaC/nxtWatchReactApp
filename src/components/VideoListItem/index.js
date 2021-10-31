@@ -37,8 +37,8 @@ const VideoItemCard = props => (
       const headTextColor = isLightThemeActive ? '#313131' : '#f9f9f9'
       const textColor = isLightThemeActive ? '#424242' : '#7e858e'
       return (
-        <Link className="link-style" to={`videos/${videoItem.id}`}>
-          <VideoListItem>
+        <VideoListItem>
+          <Link className="link-style" to={`videos/${videoItem.id}`}>
             <VideoListItemContainer>
               <VideoListItemThumbnailContainer>
                 <VideoListItemThumbnailImage
@@ -85,8 +85,8 @@ const VideoItemCard = props => (
                 </VideoListItemContentItemsContainer>
               </VideoListItemContentContainer>
             </VideoListItemContainer>
-          </VideoListItem>
-        </Link>
+          </Link>
+        </VideoListItem>
       )
     }}
   </Context.Consumer>

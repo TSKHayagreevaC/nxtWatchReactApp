@@ -94,18 +94,17 @@ export const BannerButton = styled.button`
   background-color: transparent;
 `
 
-export const VideosListHome = styled.div`
+export const VideosListHome = styled.ul`
   list-style: none;
   padding: 5px;
   margin: 0px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
   flex-wrap: wrap;
   @media screen and (min-width: 768px) {
-    flex-direction: row;
     justify-content: flex-start;
   }
 `
@@ -154,17 +153,16 @@ export const SearchForm = styled.div`
   border: 2px solid #424242;
   width: 80%;
   height: 40px;
-  margin: 20px 0px 0px 5px;
+  margin: 20px 0px 0px 16px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   align-self: flex-start;
-  border: 2px solid #42424242;
   @media screen and (min-width: 768px) {
     width: 60%;
     align-self: flex-start;
-    margin: 20px 0px 0px 15px;
+    margin: 20px 0px 0px 24px;
   }
 `
 

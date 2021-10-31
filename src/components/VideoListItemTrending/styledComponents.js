@@ -125,7 +125,7 @@ export const VideoListItemViewsTimeContainerLarge = styled.div`
 
 export const VideoListItemContainerItemText = styled.p`
   margin: 3px 0px 3px 0px;
-  font-size: 14px;
+  font-size: 12px;
   font-family: 'Roboto';
   font-weight: bold;
   color: ${props => props.color};

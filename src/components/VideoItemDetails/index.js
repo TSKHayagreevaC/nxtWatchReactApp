@@ -84,7 +84,6 @@ class VideoItemDetails extends Component {
     if (videoDetailsResponse.ok) {
       const videoDetailsData = await videoDetailsResponse.json()
       const formattedVideoDetailsData = {
-        similarVideos: this.formattedData(videoDetailsData),
         channel: {
           name: videoDetailsData.video_details.channel.name,
           profileImageUrl:
