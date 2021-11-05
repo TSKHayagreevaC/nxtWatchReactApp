@@ -13,33 +13,14 @@ export const SidebarContainer = styled.div`
   }
 `
 
-export const SidebarTopContainer = styled.div`
+export const SidebarTopContainer = styled.nav`
   width: 100%;
   display: flex;
   flex-direction: column;
   flex-direction: center;
   align-items: center;
 `
-
-export const SidebarTopContainerList = styled.ul`
-  width: 100%;
-  list-style: none;
-  padding: 5px;
-  margin: 5px 0px 5px 0px;
-`
-
-export const SidebarTopContainerListItem = styled.li`
-  list-style-type: none;
-  display: flex;
-  width: 100%;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 5px 5px 5px 15px;
-  color: ${props => props.color};
-  background-color: ${props => props.backgroundColor};
-`
-export const SidebarTopContainerListItemText = styled.p`
+export const SidebarTopContainerListItemText = styled.div`
   font-size: 20px;
   font-family: 'Roboto';
   margin: 5px 0px 5px 15px;

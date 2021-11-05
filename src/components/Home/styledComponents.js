@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const HomeContainer = styled.div`
+export const HomeBgContainer = styled.div`
   min-height: 100vh;
   min-width: 100vw;
   display: flex;

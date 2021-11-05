@@ -12,7 +12,7 @@ import Context from '../../context/Context'
 
 import './index.css'
 import {
-  HomeContainer,
+  HomeBgContainer,
   HomeBarsContainer,
   MainContainer,
   BannerContainer,
@@ -65,16 +65,6 @@ class Home extends Component {
     const {searchInput} = this.state
     this.setState({searchParameter: searchInput}, this.getVideosData)
   }
-
-  changeActiveRoute = () => (
-    <Context.Consumer>
-      {value => {
-        const {alterActiveRoute, activeRoute} = value
-        alterActiveRoute('home')
-        console.log(activeRoute)
-      }}
-    </Context.Consumer>
-  )
 
   getVideosData = async () => {
     this.setState({
@@ -304,13 +294,13 @@ class Home extends Component {
           const {isLightThemeActive} = value
           const homeBgColor = isLightThemeActive ? '#f9f9f9' : '#181818'
           return (
-            <HomeContainer backgroundColor={homeBgColor} data-testid="home">
+            <HomeBgContainer backgroundColor={homeBgColor} data-testid="home">
               <Header />
-              <HomeBarsContainer backgroundColor={homeBgColor}>
+              <HomeBarsContainer>
                 <SidebarSection />
                 {this.renderMainContainer()}
               </HomeBarsContainer>
-            </HomeContainer>
+            </HomeBgContainer>
           )
         }}
       </Context.Consumer>

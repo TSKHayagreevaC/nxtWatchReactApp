@@ -17,7 +17,6 @@ import './App.css'
 class App extends Component {
   state = {
     isLightThemeActive: true,
-    activeRoute: 'home',
     savedVideosList: [],
   }
 
@@ -27,16 +26,11 @@ class App extends Component {
     }))
   }
 
-  alterActiveRoute = routeName => {
-    this.setState({activeRoute: routeName})
-  }
-
   saveOrDeleteVideo = newVideoItem => {
     const {savedVideosList} = this.state
     const isVideoSaved = savedVideosList.find(
       eachItem => eachItem.id === newVideoItem.id,
     )
-    console.log(isVideoSaved)
     if (isVideoSaved) {
       const filteredList = savedVideosList.filter(
         eachItem => eachItem.id !== newVideoItem.id,
@@ -50,19 +44,12 @@ class App extends Component {
   }
 
   render() {
-    const {
-      isLightThemeActive,
-      activeRoute,
-      savedVideosList,
-      isVideoSaved,
-    } = this.state
+    const {isLightThemeActive, savedVideosList, isVideoSaved} = this.state
     return (
       <Context.Provider
         value={{
           isLightThemeActive,
           alterTheme: this.alterTheme,
-          activeRoute,
-          alterActiveRoute: this.alterActiveRoute,
           savedVideosList,
           isVideoSaved,
           saveOrDeleteVideo: this.saveOrDeleteVideo,

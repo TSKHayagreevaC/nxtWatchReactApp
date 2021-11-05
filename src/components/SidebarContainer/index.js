@@ -1,5 +1,5 @@
 import {Component} from 'react'
-import {Link} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 
 import {AiFillHome} from 'react-icons/ai'
 import {HiFire} from 'react-icons/hi'
@@ -12,8 +12,6 @@ import './index.css'
 import {
   SidebarContainer,
   SidebarTopContainer,
-  SidebarTopContainerList,
-  SidebarTopContainerListItem,
   SidebarTopContainerListItemText,
   SidebarBottomContainer,
   SidebarBottomHeading,
@@ -27,26 +25,10 @@ class SideBarSection extends Component {
     return (
       <Context.Consumer>
         {value => {
-          const {isLightThemeActive, activeRoute, alterActiveRoute} = value
-          const onClickHomeRoute = () => {
-            alterActiveRoute('home')
-          }
-          const onClickTrendingRoute = () => {
-            alterActiveRoute('trending')
-          }
-          const onClickGamingRoute = () => {
-            alterActiveRoute('gaming')
-          }
-          const onClickSavedVideosRoute = () => {
-            alterActiveRoute('savedVideos')
-          }
+          const {isLightThemeActive} = value
           const sidebarContainerBackgroundColor = isLightThemeActive
             ? '#ffffff'
             : '#181818'
-
-          const sidebarContainerIconsColor = isLightThemeActive
-            ? '#181818'
-            : '#f9f9f9'
 
           const sidebarContainerTextColor = isLightThemeActive
             ? '#181818'
@@ -55,120 +37,78 @@ class SideBarSection extends Component {
           return (
             <SidebarContainer backgroundColor={sidebarContainerBackgroundColor}>
               <SidebarTopContainer>
-                <SidebarTopContainerList>
-                  <SidebarTopContainerListItem
-                    onClick={onClickHomeRoute}
-                    backgroundColor={
-                      activeRoute === 'home' ? '#909090' : 'transparent'
-                    }
+                <NavLink
+                  exact
+                  to="/"
+                  className="nav-link-style"
+                  style={{
+                    textDecoration: 'none',
+                    color: `${sidebarContainerTextColor}`,
+                    width: '100%',
+                  }}
+                  activeStyle={{backgroundColor: '#909090', color: '#ff0000'}}
+                >
+                  <AiFillHome size="22" />
+                  <SidebarTopContainerListItemText
+                    color={sidebarContainerTextColor}
                   >
-                    <AiFillHome
-                      size="22"
-                      color={
-                        activeRoute === 'home'
-                          ? '#ff0000'
-                          : sidebarContainerTextColor
-                      }
-                    />
-                    <SidebarTopContainerListItemText
-                      color={sidebarContainerTextColor}
-                    >
-                      <Link
-                        to="/"
-                        style={{
-                          textDecoration: 'none',
-                          color: `${sidebarContainerTextColor}`,
-                        }}
-                      >
-                        Home
-                      </Link>
-                    </SidebarTopContainerListItemText>
-                  </SidebarTopContainerListItem>
-                  <SidebarTopContainerListItem
-                    onClick={onClickTrendingRoute}
-                    backgroundColor={
-                      activeRoute === 'trending' ? '#909090' : 'transparent'
-                    }
+                    Home
+                  </SidebarTopContainerListItemText>
+                </NavLink>
+                <NavLink
+                  exact
+                  to="/trending"
+                  className="nav-link-style"
+                  style={{
+                    textDecoration: 'none',
+                    color: `${sidebarContainerTextColor}`,
+                    width: '100%',
+                  }}
+                  activeStyle={{backgroundColor: '#909090', color: '#ff0000'}}
+                >
+                  <HiFire size="22" />
+                  <SidebarTopContainerListItemText
+                    color={sidebarContainerTextColor}
                   >
-                    <HiFire
-                      size="22"
-                      color={
-                        activeRoute === 'trending'
-                          ? '#ff0000'
-                          : sidebarContainerIconsColor
-                      }
-                    />
-                    <SidebarTopContainerListItemText
-                      color={sidebarContainerTextColor}
-                    >
-                      <Link
-                        to="/trending"
-                        style={{
-                          textDecoration: 'none',
-                          color: `${sidebarContainerTextColor}`,
-                        }}
-                      >
-                        Trending
-                      </Link>
-                    </SidebarTopContainerListItemText>
-                  </SidebarTopContainerListItem>
-                  <SidebarTopContainerListItem
-                    onClick={onClickGamingRoute}
-                    backgroundColor={
-                      activeRoute === 'gaming' ? '#909090' : 'transparent'
-                    }
+                    Trending
+                  </SidebarTopContainerListItemText>
+                </NavLink>
+                <NavLink
+                  exact
+                  to="/gaming"
+                  className="nav-link-style"
+                  style={{
+                    textDecoration: 'none',
+                    color: `${sidebarContainerTextColor}`,
+                    width: '100%',
+                  }}
+                  activeStyle={{backgroundColor: '#909090', color: '#ff0000'}}
+                >
+                  <SiYoutubegaming size="22" />
+                  <SidebarTopContainerListItemText
+                    color={sidebarContainerTextColor}
                   >
-                    <SiYoutubegaming
-                      size="22"
-                      color={
-                        activeRoute === 'gaming'
-                          ? '#ff0000'
-                          : sidebarContainerIconsColor
-                      }
-                    />
-                    <SidebarTopContainerListItemText
-                      color={sidebarContainerTextColor}
-                    >
-                      <Link
-                        to="/gaming"
-                        style={{
-                          textDecoration: 'none',
-                          color: `${sidebarContainerTextColor}`,
-                        }}
-                      >
-                        Gaming
-                      </Link>
-                    </SidebarTopContainerListItemText>
-                  </SidebarTopContainerListItem>
-                  <SidebarTopContainerListItem
-                    onClick={onClickSavedVideosRoute}
-                    backgroundColor={
-                      activeRoute === 'savedVideos' ? '#909090' : 'transparent'
-                    }
+                    Gaming
+                  </SidebarTopContainerListItemText>
+                </NavLink>
+                <NavLink
+                  exact
+                  to="/saved-videos"
+                  className="nav-link-style"
+                  style={{
+                    textDecoration: 'none',
+                    color: `${sidebarContainerTextColor}`,
+                    width: '100%',
+                  }}
+                  activeStyle={{backgroundColor: '#909090', color: '#ff0000'}}
+                >
+                  <BiListPlus size="22" />
+                  <SidebarTopContainerListItemText
+                    color={sidebarContainerTextColor}
                   >
-                    <BiListPlus
-                      color={
-                        activeRoute === 'savedVideos'
-                          ? '#ff0000'
-                          : sidebarContainerTextColor
-                      }
-                      size="22"
-                    />
-                    <SidebarTopContainerListItemText
-                      color={sidebarContainerTextColor}
-                    >
-                      <Link
-                        to="/saved-videos"
-                        style={{
-                          textDecoration: 'none',
-                          color: `${sidebarContainerTextColor}`,
-                        }}
-                      >
-                        Saved videos
-                      </Link>
-                    </SidebarTopContainerListItemText>
-                  </SidebarTopContainerListItem>
-                </SidebarTopContainerList>
+                    Saved videos
+                  </SidebarTopContainerListItemText>
+                </NavLink>
               </SidebarTopContainer>
               <SidebarBottomContainer>
                 <SidebarBottomHeading color={sidebarContainerTextColor}>

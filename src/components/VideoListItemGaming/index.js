@@ -26,7 +26,7 @@ const VideoItemCardGaming = props => (
             <VideoListItemContainer>
               <VideoListItemThumbnailImage
                 src={videoItem.thumbnailUrl}
-                alt="gaming thumbnail url"
+                alt="video thumbnail"
               />
               <VideoListItemContentItemsHeading color={headTextColor}>
                 {videoItem.title}

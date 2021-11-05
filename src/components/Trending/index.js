@@ -12,7 +12,7 @@ import Context from '../../context/Context'
 import './index.css'
 
 import {
-  HomeContainer,
+  TrendingBgContainer,
   HomeBarsContainer,
   MainContainer,
   BannerContainer,
@@ -47,6 +47,15 @@ class Trending extends Component {
   componentDidMount() {
     this.getVideosData()
   }
+
+  changeActiveRoute = () => (
+    <Context.Consumer>
+      {value => {
+        const {alterActiveRoute} = value
+        alterActiveRoute('trending')
+      }}
+    </Context.Consumer>
+  )
 
   getVideosData = async () => {
     this.setState({
@@ -247,7 +256,7 @@ class Trending extends Component {
           const {isLightThemeActive} = value
           const trendingBgColor = isLightThemeActive ? '#f9f9f9' : '#0f0f0f'
           return (
-            <HomeContainer
+            <TrendingBgContainer
               backgroundColor={trendingBgColor}
               data-testid="trending"
             >
@@ -256,7 +265,7 @@ class Trending extends Component {
                 <SidebarSection />
                 {this.renderMainContainer()}
               </HomeBarsContainer>
-            </HomeContainer>
+            </TrendingBgContainer>
           )
         }}
       </Context.Consumer>

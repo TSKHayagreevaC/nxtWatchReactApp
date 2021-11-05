@@ -154,7 +154,7 @@ export const VideoItemProfileContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
   width: 90%;
 `
 
@@ -202,12 +202,10 @@ export const VideoProfileDescriptionLargeText = styled.p`
 
 export const VideoProfileDescriptionSmallText = styled.p`
   width: 80%;
-  display: block;
   margin: 5px;
-  font-size: 18px;
   font-size: 14px;
   color: ${props => props.color};
   @media screen and (min-width: 768px) {
-    display: none;
+    font-size: 18px;
   }
 `

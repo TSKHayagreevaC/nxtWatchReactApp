@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const HomeContainer = styled.div`
+export const TrendingBgContainer = styled.div`
   min-height: 100vh;
   min-width: 100vw;
   display: flex;
@@ -38,7 +38,7 @@ export const BannerContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 10px 0px 10px 10px;
+  padding: 10px 0px 10px 0px;
   background-color: ${props => props.backgroundColor};
   @media screen and (min-width: 768px) {
     justify-content: flex-start;

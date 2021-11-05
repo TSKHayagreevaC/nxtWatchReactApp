@@ -10,7 +10,7 @@ import Context from '../../context/Context'
 import './index.css'
 
 import {
-  HomeContainer,
+  SavedVideosBgContainer,
   HomeBarsContainer,
   MainContainer,
   BannerContainer,
@@ -120,7 +120,7 @@ class SavedVideos extends Component {
           const {isLightThemeActive} = value
           const savedVideosBgColor = isLightThemeActive ? '#f9f9f9' : '#0f0f0f'
           return (
-            <HomeContainer
+            <SavedVideosBgContainer
               backgroundColor={savedVideosBgColor}
               data-testid="savedVideos"
             >
@@ -129,7 +129,7 @@ class SavedVideos extends Component {
                 <SidebarSection />
                 {this.renderMainContainer()}
               </HomeBarsContainer>
-            </HomeContainer>
+            </SavedVideosBgContainer>
           )
         }}
       </Context.Consumer>

@@ -32,7 +32,6 @@ import {
   VideoItemProfileDescriptionContainer,
   VideoProfileChannelName,
   VideoProfileChannelSubscribers,
-  VideoProfileDescriptionLargeText,
   VideoProfileDescriptionSmallText,
 } from './styledComponents'
 
@@ -198,10 +197,7 @@ class VideoItemDetails extends Component {
           saveOrDeleteVideo(videoDetails)
         }
         return (
-          <VideoItemContainer
-            backgroundColor={videoItemBgColor}
-            data-testid="videoItemDetails"
-          >
+          <VideoItemContainer backgroundColor={videoItemBgColor}>
             <ReactPlayer controls width="90%" url={videoDetails.videoUrl} />
             <VideoItemDescription color={videoItemDescriptionColor}>
               {videoDetails.title}
@@ -260,9 +256,6 @@ class VideoItemDetails extends Component {
                 <VideoProfileChannelSubscribers color={channelSubscriberColor}>
                   {videoDetails.channel.subscriberCount}
                 </VideoProfileChannelSubscribers>
-                <VideoProfileDescriptionLargeText color={channelNameColor}>
-                  {videoDetails.description}
-                </VideoProfileDescriptionLargeText>
               </VideoItemProfileDescriptionContainer>
             </VideoItemProfileContainer>
             <VideoProfileDescriptionSmallText color={channelNameColor}>
@@ -296,7 +289,10 @@ class VideoItemDetails extends Component {
           const {isLightThemeActive} = value
           const videoItemBgColor = isLightThemeActive ? '#f9f9f9' : '#0f0f0f'
           return (
-            <VideoItemDetailsContainer backgroundColor={videoItemBgColor}>
+            <VideoItemDetailsContainer
+              backgroundColor={videoItemBgColor}
+              data-testid="videoItemDetails"
+            >
               <Header />
               <VideoItemDetailsRowContainer>
                 <SidebarSection />

@@ -1,5 +1,5 @@
 import {Component} from 'react'
-import {Link, withRouter} from 'react-router-dom'
+import {NavLink, Link, withRouter} from 'react-router-dom'
 import Cookies from 'js-cookie'
 import Popup from 'reactjs-popup'
 
@@ -8,7 +8,7 @@ import './index.css'
 import {HiMoon, HiFire} from 'react-icons/hi'
 import {FiSun, FiLogOut} from 'react-icons/fi'
 import {GiHamburgerMenu} from 'react-icons/gi'
-import {AiFillHome} from 'react-icons/ai'
+import {AiFillHome, AiOutlineClose} from 'react-icons/ai'
 import {SiYoutubegaming} from 'react-icons/si'
 import {BiListPlus} from 'react-icons/bi'
 
@@ -20,14 +20,13 @@ import {
   HeaderLogo,
   HeaderThemeButton,
   HeaderHamburgerButton,
+  HamburgerModalContainer,
+  HamburgerModalCloseButton,
+  HamburgerModalLinksContainer,
+  HamburgerModalLinksText,
   HeaderLargeUserImage,
   HeaderLogoutButtonSmall,
   HeaderLogoutButton,
-  HamburgerDisplayContainer,
-  HamburgerMenuContainer,
-  SidebarTopContainerList,
-  SidebarTopContainerListItem,
-  SidebarTopContainerListItemText,
   LogoutModalContainer,
   LogoutModalText,
   LogoutButtonsContainer,
@@ -36,10 +35,6 @@ import {
 } from './styledComponents'
 
 class Header extends Component {
-  state = {
-    displayHamburg: false,
-  }
-
   removeJwtToken = () => {
     const {history} = this.props
     Cookies.remove('jwt_token')
@@ -50,23 +45,14 @@ class Header extends Component {
     return (
       <Context.Consumer>
         {value => {
-          const {
-            isLightThemeActive,
-            alterTheme,
-            activeRoute,
-            alterActiveRoute,
-          } = value
-          const {displayHamburg} = this.state
-          const displayHamburgValue = displayHamburg ? 'block' : 'none'
+          const {isLightThemeActive, alterTheme} = value
           const headerBackgroundColor = isLightThemeActive
             ? '#ffffff'
             : '#181818'
           const headerLogoImage = isLightThemeActive
             ? 'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png'
             : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-dark-theme-img.png'
-          const onClickLogoImage = () => {
-            alterActiveRoute('home')
-          }
+
           const themeButtonImage = isLightThemeActive ? (
             <HiMoon size="35" />
           ) : (
@@ -76,19 +62,6 @@ class Header extends Component {
           const headerLogoutIconColor = isLightThemeActive
             ? '#181818'
             : '#f9f9f9'
-
-          const onClickHomeRoute = () => {
-            alterActiveRoute('home')
-          }
-          const onClickTrendingRoute = () => {
-            alterActiveRoute('trending')
-          }
-          const onClickGamingRoute = () => {
-            alterActiveRoute('gaming')
-          }
-          const onClickSavedVideosRoute = () => {
-            alterActiveRoute('savedVideos')
-          }
 
           const displayHamburgMenu = () => {
             this.setState(prevState => ({
@@ -100,16 +73,12 @@ class Header extends Component {
             ? '#181818'
             : '#f9f9f9'
 
-          const sidebarContainerIconsColor = isLightThemeActive
-            ? '#181818'
-            : '#f9f9f9'
-
           const popupModalBgColor = isLightThemeActive ? '#f9f9f9' : '#181818'
           const popupModalTextColor = isLightThemeActive ? '#181818' : '#f9f9f9'
           return (
             <HeaderBgContainer>
               <HeaderContainer backgroundColor={headerBackgroundColor}>
-                <Link to="/" onClick={onClickLogoImage}>
+                <Link to="/">
                   <HeaderLogo src={headerLogoImage} alt="website logo" />
                 </Link>
                 <HeaderLinksContainer>
@@ -120,9 +89,115 @@ class Header extends Component {
                   >
                     {themeButtonImage}
                   </HeaderThemeButton>
-                  <HeaderHamburgerButton onClick={displayHamburgMenu}>
-                    <GiHamburgerMenu size="32" color={headerUserIconColor} />
-                  </HeaderHamburgerButton>
+                  <Popup
+                    className="ham-popup-content"
+                    trigger=<HeaderHamburgerButton onClick={displayHamburgMenu}>
+                      <GiHamburgerMenu size="32" color={headerUserIconColor} />
+                    </HeaderHamburgerButton>
+                    modal
+                  >
+                    {close => (
+                      <HamburgerModalContainer
+                        backgroundColor={headerBackgroundColor}
+                      >
+                        <HamburgerModalCloseButton
+                          type="button"
+                          onClick={close}
+                        >
+                          <AiOutlineClose
+                            size="22px"
+                            color={headerUserIconColor}
+                          />
+                        </HamburgerModalCloseButton>
+                        <HamburgerModalLinksContainer>
+                          <NavLink
+                            exact
+                            to="/"
+                            className="nav-link-style"
+                            style={{
+                              textDecoration: 'none',
+                              color: `${sidebarContainerTextColor}`,
+                              width: '100%',
+                            }}
+                            activeStyle={{
+                              backgroundColor: '#909090',
+                              color: '#ff0000',
+                            }}
+                          >
+                            <AiFillHome size="22" />
+                            <HamburgerModalLinksText
+                              color={sidebarContainerTextColor}
+                            >
+                              Home
+                            </HamburgerModalLinksText>
+                          </NavLink>
+                          <NavLink
+                            exact
+                            to="/trending"
+                            className="nav-link-style"
+                            style={{
+                              textDecoration: 'none',
+                              color: `${sidebarContainerTextColor}`,
+                              width: '100%',
+                            }}
+                            activeStyle={{
+                              backgroundColor: '#909090',
+                              color: '#ff0000',
+                            }}
+                          >
+                            <HiFire size="22" />
+                            <HamburgerModalLinksText
+                              color={sidebarContainerTextColor}
+                            >
+                              Trending
+                            </HamburgerModalLinksText>
+                          </NavLink>
+                          <NavLink
+                            exact
+                            to="/gaming"
+                            className="nav-link-style"
+                            style={{
+                              textDecoration: 'none',
+                              color: `${sidebarContainerTextColor}`,
+                              width: '100%',
+                            }}
+                            activeStyle={{
+                              backgroundColor: '#909090',
+                              color: '#ff0000',
+                            }}
+                          >
+                            <SiYoutubegaming size="22" />
+                            <HamburgerModalLinksText
+                              color={sidebarContainerTextColor}
+                            >
+                              Gaming
+                            </HamburgerModalLinksText>
+                          </NavLink>
+                          <NavLink
+                            exact
+                            to="/saved-videos"
+                            className="nav-link-style"
+                            style={{
+                              textDecoration: 'none',
+                              color: `${sidebarContainerTextColor}`,
+                              width: '100%',
+                            }}
+                            activeStyle={{
+                              backgroundColor: '#909090',
+                              color: '#ff0000',
+                            }}
+                          >
+                            <BiListPlus size="22" />
+                            <HamburgerModalLinksText
+                              color={sidebarContainerTextColor}
+                            >
+                              Saved videos
+                            </HamburgerModalLinksText>
+                          </NavLink>
+                        </HamburgerModalLinksContainer>
+                      </HamburgerModalContainer>
+                    )}
+                  </Popup>
                   <HeaderLargeUserImage
                     src="https://assets.ccbp.in/frontend/react-js/nxt-watch-profile-img.png"
                     alt="profile"
@@ -187,126 +262,6 @@ class Header extends Component {
                   </Popup>
                 </HeaderLinksContainer>
               </HeaderContainer>
-              <HamburgerDisplayContainer display={displayHamburgValue}>
-                <HamburgerMenuContainer backgroundColor={headerBackgroundColor}>
-                  <SidebarTopContainerList>
-                    <SidebarTopContainerListItem
-                      onClick={onClickHomeRoute}
-                      backgroundColor={
-                        activeRoute === 'home' ? '#909090' : 'transparent'
-                      }
-                    >
-                      <AiFillHome
-                        size="22"
-                        color={
-                          activeRoute === 'home'
-                            ? '#ff0000'
-                            : sidebarContainerTextColor
-                        }
-                      />
-                      <SidebarTopContainerListItemText
-                        color={sidebarContainerTextColor}
-                      >
-                        <Link
-                          to="/"
-                          style={{
-                            textDecoration: 'none',
-                            color: `${sidebarContainerTextColor}`,
-                          }}
-                        >
-                          Home
-                        </Link>
-                      </SidebarTopContainerListItemText>
-                    </SidebarTopContainerListItem>
-                    <SidebarTopContainerListItem
-                      onClick={onClickTrendingRoute}
-                      backgroundColor={
-                        activeRoute === 'trending' ? '#909090' : 'transparent'
-                      }
-                    >
-                      <HiFire
-                        size="22"
-                        color={
-                          activeRoute === 'trending'
-                            ? '#ff0000'
-                            : sidebarContainerIconsColor
-                        }
-                      />
-                      <SidebarTopContainerListItemText
-                        color={sidebarContainerTextColor}
-                      >
-                        <Link
-                          to="/trending"
-                          style={{
-                            textDecoration: 'none',
-                            color: `${sidebarContainerTextColor}`,
-                          }}
-                        >
-                          Trending
-                        </Link>
-                      </SidebarTopContainerListItemText>
-                    </SidebarTopContainerListItem>
-                    <SidebarTopContainerListItem
-                      onClick={onClickGamingRoute}
-                      backgroundColor={
-                        activeRoute === 'gaming' ? '#909090' : 'transparent'
-                      }
-                    >
-                      <SiYoutubegaming
-                        size="22"
-                        color={
-                          activeRoute === 'gaming'
-                            ? '#ff0000'
-                            : sidebarContainerIconsColor
-                        }
-                      />
-                      <SidebarTopContainerListItemText
-                        color={sidebarContainerTextColor}
-                      >
-                        <Link
-                          to="/gaming"
-                          style={{
-                            textDecoration: 'none',
-                            color: `${sidebarContainerTextColor}`,
-                          }}
-                        >
-                          Gaming
-                        </Link>
-                      </SidebarTopContainerListItemText>
-                    </SidebarTopContainerListItem>
-                    <SidebarTopContainerListItem
-                      onClick={onClickSavedVideosRoute}
-                      backgroundColor={
-                        activeRoute === 'savedVideos'
-                          ? '#909090'
-                          : 'transparent'
-                      }
-                    >
-                      <BiListPlus
-                        color={
-                          activeRoute === 'savedVideos'
-                            ? '#ff0000'
-                            : sidebarContainerTextColor
-                        }
-                        size="22"
-                      />
-                      <SidebarTopContainerListItemText
-                        color={sidebarContainerTextColor}
-                      >
-                        <Link
-                          to="/saved-videos"
-                          style={{
-                            textDecoration: 'none',
-                            color: `${sidebarContainerTextColor}`,
-                          }}
-                        >
-                          Saved videos
-                        </Link>
-                      </SidebarTopContainerListItemText>
-                    </SidebarTopContainerListItem>
-                  </SidebarTopContainerList>
-                </HamburgerMenuContainer>
-              </HamburgerDisplayContainer>
             </HeaderBgContainer>
           )
         }}

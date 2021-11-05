@@ -58,6 +58,40 @@ export const HeaderHamburgerButton = styled.button`
     display: none;
   }
 `
+export const HamburgerModalContainer = styled.div`
+  height: 100vh;
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: ${props => props.backgroundColor};
+`
+
+export const HamburgerModalCloseButton = styled.button`
+  border: none;
+  outline: none;
+  background: none;
+  align-self: flex-end;
+  cursor: pointer;
+`
+
+export const HamburgerModalLinksContainer = styled.div`
+  width: 100%;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+
+export const HamburgerModalLinksText = styled.div`
+  font-size: 16px;
+  font-family: 'Roboto';
+  margin: 5px 0px 5px 15px;
+  font-weight: 600;
+  color: ${props => props.color};
+`
 
 export const HeaderUserImageContainer = styled.div`
   width: 30px;
@@ -71,13 +105,13 @@ export const HeaderUserImageContainer = styled.div`
     display: none;
   }
 `
+
 export const HeaderLargeUserImage = styled.img`
   display: none;
   @media screen and (min-width: 768px) {
     display: block;
     width: 40px;
     height: 40px;
-    cursor: pointer;
   }
 `
 
@@ -116,49 +150,11 @@ export const HeaderLogoutButton = styled.button`
   }
 `
 
-export const HamburgerDisplayContainer = styled.div`
-  display: ${props => props.display};
-  align-self: flex-end;
-`
-
-export const HamburgerMenuContainer = styled.div`
-  background-color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-end;
-  align-self: flex-end;
-  background-color: ${props => props.backgroundColor};
-  margin: 0px 10px 10px 10px;
-  @media screen and (min-width: 768px) {
-    display: none;
-  }
-`
-
-export const SidebarTopContainerList = styled.ul`
+export const SidebarTopContainerList = styled.div`
   width: 100%;
   list-style: none;
   padding: 5px;
   margin: 5px 0px 5px 0px;
-`
-
-export const SidebarTopContainerListItem = styled.li`
-  list-style-type: none;
-  display: flex;
-  width: 100%;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 5px 5px 5px 15px;
-  color: ${props => props.color};
-  background-color: ${props => props.backgroundColor};
-`
-export const SidebarTopContainerListItemText = styled.p`
-  font-size: 20px;
-  font-family: 'Roboto';
-  margin: 5px 0px 5px 15px;
-  font-weight: 600;
-  color: ${props => props.color};
 `
 
 export const LogoutModalContainer = styled.div`
