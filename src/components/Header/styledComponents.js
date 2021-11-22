@@ -92,6 +92,19 @@ export const HamburgerModalLinksText = styled.div`
   font-weight: 600;
   color: ${props => props.color};
 `
+export const SmallLogoutPopupContainer = styled.div`
+  display: block;
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
+`
+
+export const LargeLogoutPopupContainer = styled.div`
+  display: none;
+  @media screen and (min-width: 768px) {
+    display: block;
+  }
+`
 
 export const HeaderUserImageContainer = styled.div`
   width: 30px;

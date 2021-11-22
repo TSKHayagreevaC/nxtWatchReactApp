@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom'
 
 import {BsDot} from 'react-icons/bs'
-import {format, formatDistanceToNow} from 'date-fns'
+import {format, formatDistanceStrict} from 'date-fns'
 
 import Context from '../../context/Context'
 
@@ -22,6 +22,14 @@ import {
   VideoListItemContainerItemText,
 } from './styledComponents'
 
+const dateFormatDistance = dateString => {
+  const formatDistanceDate = formatDistanceStrict(
+    new Date(dateString),
+    new Date(),
+  )
+  return formatDistanceDate
+}
+
 const VideoItemCard = props => (
   <Context.Consumer>
     {value => {
@@ -31,8 +39,7 @@ const VideoItemCard = props => (
         new Date(videoItem.publishedAt),
         'yyyy, MM, dd',
       )
-      const newDate = new Date(formattedDate)
-      const publishedTimeAgo = formatDistanceToNow(newDate)
+      const publishedTimeAgo = dateFormatDistance(formattedDate)
 
       const headTextColor = isLightThemeActive ? '#313131' : '#f9f9f9'
       const textColor = isLightThemeActive ? '#424242' : '#7e858e'

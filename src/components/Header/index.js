@@ -24,6 +24,8 @@ import {
   HamburgerModalCloseButton,
   HamburgerModalLinksContainer,
   HamburgerModalLinksText,
+  SmallLogoutPopupContainer,
+  LargeLogoutPopupContainer,
   HeaderLargeUserImage,
   HeaderLogoutButtonSmall,
   HeaderLogoutButton,
@@ -89,177 +91,192 @@ class Header extends Component {
                   >
                     {themeButtonImage}
                   </HeaderThemeButton>
-                  <Popup
-                    className="ham-popup-content"
-                    trigger=<HeaderHamburgerButton onClick={displayHamburgMenu}>
-                      <GiHamburgerMenu size="32" color={headerUserIconColor} />
-                    </HeaderHamburgerButton>
-                    modal
-                  >
-                    {close => (
-                      <HamburgerModalContainer
-                        backgroundColor={headerBackgroundColor}
+                  <SmallLogoutPopupContainer>
+                    <Popup
+                      className="popup-content"
+                      trigger=<HeaderHamburgerButton
+                        onClick={displayHamburgMenu}
                       >
-                        <HamburgerModalCloseButton
-                          type="button"
-                          onClick={close}
+                        <GiHamburgerMenu
+                          size="32"
+                          color={headerUserIconColor}
+                        />
+                      </HeaderHamburgerButton>
+                      modal
+                    >
+                      {close => (
+                        <HamburgerModalContainer
+                          backgroundColor={headerBackgroundColor}
                         >
-                          <AiOutlineClose
-                            size="22px"
-                            color={headerUserIconColor}
-                          />
-                        </HamburgerModalCloseButton>
-                        <HamburgerModalLinksContainer>
-                          <NavLink
-                            exact
-                            to="/"
-                            className="nav-link-style"
-                            style={{
-                              textDecoration: 'none',
-                              color: `${sidebarContainerTextColor}`,
-                              width: '100%',
-                            }}
-                            activeStyle={{
-                              backgroundColor: '#909090',
-                              color: '#ff0000',
-                            }}
+                          <HamburgerModalCloseButton
+                            type="button"
+                            onClick={close}
                           >
-                            <AiFillHome size="22" />
-                            <HamburgerModalLinksText
-                              color={sidebarContainerTextColor}
+                            <AiOutlineClose
+                              size="22px"
+                              color={headerUserIconColor}
+                            />
+                          </HamburgerModalCloseButton>
+                          <HamburgerModalLinksContainer>
+                            <NavLink
+                              exact
+                              to="/"
+                              className="nav-link-style"
+                              style={{
+                                textDecoration: 'none',
+                                color: `${sidebarContainerTextColor}`,
+                                width: '100%',
+                              }}
+                              activeStyle={{
+                                backgroundColor: '#909090',
+                                color: '#ff0000',
+                              }}
                             >
-                              Home
-                            </HamburgerModalLinksText>
-                          </NavLink>
-                          <NavLink
-                            exact
-                            to="/trending"
-                            className="nav-link-style"
-                            style={{
-                              textDecoration: 'none',
-                              color: `${sidebarContainerTextColor}`,
-                              width: '100%',
-                            }}
-                            activeStyle={{
-                              backgroundColor: '#909090',
-                              color: '#ff0000',
-                            }}
-                          >
-                            <HiFire size="22" />
-                            <HamburgerModalLinksText
-                              color={sidebarContainerTextColor}
+                              <AiFillHome size="22" />
+                              <HamburgerModalLinksText
+                                color={sidebarContainerTextColor}
+                              >
+                                Home
+                              </HamburgerModalLinksText>
+                            </NavLink>
+                            <NavLink
+                              exact
+                              to="/trending"
+                              className="nav-link-style"
+                              style={{
+                                textDecoration: 'none',
+                                color: `${sidebarContainerTextColor}`,
+                                width: '100%',
+                              }}
+                              activeStyle={{
+                                backgroundColor: '#909090',
+                                color: '#ff0000',
+                              }}
                             >
-                              Trending
-                            </HamburgerModalLinksText>
-                          </NavLink>
-                          <NavLink
-                            exact
-                            to="/gaming"
-                            className="nav-link-style"
-                            style={{
-                              textDecoration: 'none',
-                              color: `${sidebarContainerTextColor}`,
-                              width: '100%',
-                            }}
-                            activeStyle={{
-                              backgroundColor: '#909090',
-                              color: '#ff0000',
-                            }}
-                          >
-                            <SiYoutubegaming size="22" />
-                            <HamburgerModalLinksText
-                              color={sidebarContainerTextColor}
+                              <HiFire size="22" />
+                              <HamburgerModalLinksText
+                                color={sidebarContainerTextColor}
+                              >
+                                Trending
+                              </HamburgerModalLinksText>
+                            </NavLink>
+                            <NavLink
+                              exact
+                              to="/gaming"
+                              className="nav-link-style"
+                              style={{
+                                textDecoration: 'none',
+                                color: `${sidebarContainerTextColor}`,
+                                width: '100%',
+                              }}
+                              activeStyle={{
+                                backgroundColor: '#909090',
+                                color: '#ff0000',
+                              }}
                             >
-                              Gaming
-                            </HamburgerModalLinksText>
-                          </NavLink>
-                          <NavLink
-                            exact
-                            to="/saved-videos"
-                            className="nav-link-style"
-                            style={{
-                              textDecoration: 'none',
-                              color: `${sidebarContainerTextColor}`,
-                              width: '100%',
-                            }}
-                            activeStyle={{
-                              backgroundColor: '#909090',
-                              color: '#ff0000',
-                            }}
-                          >
-                            <BiListPlus size="22" />
-                            <HamburgerModalLinksText
-                              color={sidebarContainerTextColor}
+                              <SiYoutubegaming size="22" />
+                              <HamburgerModalLinksText
+                                color={sidebarContainerTextColor}
+                              >
+                                Gaming
+                              </HamburgerModalLinksText>
+                            </NavLink>
+                            <NavLink
+                              exact
+                              to="/saved-videos"
+                              className="nav-link-style"
+                              style={{
+                                textDecoration: 'none',
+                                color: `${sidebarContainerTextColor}`,
+                                width: '100%',
+                              }}
+                              activeStyle={{
+                                backgroundColor: '#909090',
+                                color: '#ff0000',
+                              }}
                             >
-                              Saved videos
-                            </HamburgerModalLinksText>
-                          </NavLink>
-                        </HamburgerModalLinksContainer>
-                      </HamburgerModalContainer>
-                    )}
-                  </Popup>
+                              <BiListPlus size="22" />
+                              <HamburgerModalLinksText
+                                color={sidebarContainerTextColor}
+                              >
+                                Saved videos
+                              </HamburgerModalLinksText>
+                            </NavLink>
+                          </HamburgerModalLinksContainer>
+                        </HamburgerModalContainer>
+                      )}
+                    </Popup>
+                  </SmallLogoutPopupContainer>
                   <HeaderLargeUserImage
                     src="https://assets.ccbp.in/frontend/react-js/nxt-watch-profile-img.png"
                     alt="profile"
                   />
-                  <Popup
-                    trigger=<HeaderLogoutButtonSmall type="button">
-                      <FiLogOut size="30" color={headerLogoutIconColor} />
-                    </HeaderLogoutButtonSmall>
-                    modal
-                    className="popup-content"
-                  >
-                    {close => (
-                      <LogoutModalContainer backgroundColor={popupModalBgColor}>
-                        <LogoutModalText color={popupModalTextColor}>
-                          Are you sure, you want to logout
-                        </LogoutModalText>
-                        <LogoutButtonsContainer>
-                          <LogoutModalCancelButton
-                            type="button"
-                            onClick={close}
-                          >
-                            Cancel
-                          </LogoutModalCancelButton>
-                          <LogoutModalLogoutButton
-                            type="button"
-                            onClick={this.removeJwtToken}
-                          >
-                            Confirm
-                          </LogoutModalLogoutButton>
-                        </LogoutButtonsContainer>
-                      </LogoutModalContainer>
-                    )}
-                  </Popup>
-                  <Popup
-                    trigger=<HeaderLogoutButton type="button">
-                      Logout
-                    </HeaderLogoutButton>
-                    modal
-                    className="popup-content"
-                  >
-                    {close => (
-                      <LogoutModalContainer backgroundColor={popupModalBgColor}>
-                        <LogoutModalText color={popupModalTextColor}>
-                          Are you sure, you want to logout?
-                        </LogoutModalText>
-                        <LogoutButtonsContainer>
-                          <LogoutModalCancelButton
-                            type="button"
-                            onClick={close}
-                          >
-                            Cancel
-                          </LogoutModalCancelButton>
-                          <LogoutModalLogoutButton
-                            type="button"
-                            onClick={this.removeJwtToken}
-                          >
-                            Confirm
-                          </LogoutModalLogoutButton>
-                        </LogoutButtonsContainer>
-                      </LogoutModalContainer>
-                    )}
-                  </Popup>
+                  <SmallLogoutPopupContainer>
+                    <Popup
+                      trigger=<HeaderLogoutButtonSmall type="button">
+                        <FiLogOut size="30" color={headerLogoutIconColor} />
+                      </HeaderLogoutButtonSmall>
+                      modal
+                      className="popup-content"
+                    >
+                      {close => (
+                        <LogoutModalContainer
+                          backgroundColor={popupModalBgColor}
+                        >
+                          <LogoutModalText color={popupModalTextColor}>
+                            Are you sure, you want to logout
+                          </LogoutModalText>
+                          <LogoutButtonsContainer>
+                            <LogoutModalCancelButton
+                              type="button"
+                              onClick={close}
+                            >
+                              Cancel
+                            </LogoutModalCancelButton>
+                            <LogoutModalLogoutButton
+                              type="button"
+                              onClick={this.removeJwtToken}
+                            >
+                              Confirm
+                            </LogoutModalLogoutButton>
+                          </LogoutButtonsContainer>
+                        </LogoutModalContainer>
+                      )}
+                    </Popup>
+                  </SmallLogoutPopupContainer>
+                  <LargeLogoutPopupContainer>
+                    <Popup
+                      trigger=<HeaderLogoutButton type="button">
+                        Logout
+                      </HeaderLogoutButton>
+                      modal
+                      className="popup-content"
+                    >
+                      {close => (
+                        <LogoutModalContainer
+                          backgroundColor={popupModalBgColor}
+                        >
+                          <LogoutModalText color={popupModalTextColor}>
+                            Are you sure, you want to logout?
+                          </LogoutModalText>
+                          <LogoutButtonsContainer>
+                            <LogoutModalCancelButton
+                              type="button"
+                              onClick={close}
+                            >
+                              Cancel
+                            </LogoutModalCancelButton>
+                            <LogoutModalLogoutButton
+                              type="button"
+                              onClick={this.removeJwtToken}
+                            >
+                              Confirm
+                            </LogoutModalLogoutButton>
+                          </LogoutButtonsContainer>
+                        </LogoutModalContainer>
+                      )}
+                    </Popup>
+                  </LargeLogoutPopupContainer>
                 </HeaderLinksContainer>
               </HeaderContainer>
             </HeaderBgContainer>

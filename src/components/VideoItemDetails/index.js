@@ -2,7 +2,7 @@ import {Component} from 'react'
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
 import ReactPlayer from 'react-player'
-import {format, formatDistanceToNow} from 'date-fns'
+import {format, formatDistanceStrict} from 'date-fns'
 
 import {BsDot} from 'react-icons/bs'
 import {AiOutlineLike, AiOutlineDislike} from 'react-icons/ai'
@@ -165,6 +165,14 @@ class VideoItemDetails extends Component {
     this.setState({isLikeActive: false, isDislikeActive: true})
   }
 
+  dateFormatDistance = dateString => {
+    const formatDistanceDate = formatDistanceStrict(
+      new Date(dateString),
+      new Date(),
+    )
+    return formatDistanceDate
+  }
+
   renderVideoItemDetails = () => (
     <Context.Consumer>
       {value => {
@@ -186,8 +194,7 @@ class VideoItemDetails extends Component {
           new Date(videoDetails.publishedAt),
           'yyyy, MM, dd',
         )
-        const newDate = new Date(formattedDate)
-        const publishedTimeAgo = formatDistanceToNow(newDate)
+        const publishedTimeAgo = this.dateFormatDistance(formattedDate)
         const channelNameColor = isLightThemeActive ? '#1e293b' : '#cccccc'
         const channelSubscriberColor = isLightThemeActive
           ? '#475569'
